@@ -4,6 +4,7 @@ package com.rengwuxian.rxjavasamples.network;
 
 import com.rengwuxian.rxjavasamples.network.api.FakeApi;
 import com.rengwuxian.rxjavasamples.network.api.GankApi;
+import com.rengwuxian.rxjavasamples.network.api.GitHubApi;
 import com.rengwuxian.rxjavasamples.network.api.ZhuangbiApi;
 
 import okhttp3.OkHttpClient;
@@ -17,6 +18,7 @@ public class Network {
     private static ZhuangbiApi zhuangbiApi;
     private static GankApi gankApi;
     private static FakeApi fakeApi;
+    private static GitHubApi sGitHubApi;
     private static OkHttpClient okHttpClient = new OkHttpClient();
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
@@ -52,5 +54,18 @@ public class Network {
             fakeApi = new FakeApi();
         }
         return fakeApi;
+    }
+
+    public static GitHubApi getGitHubApi() {
+        if (sGitHubApi == null) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .client(okHttpClient)
+                    .baseUrl("https://api.github.com/")
+                    .addConverterFactory(gsonConverterFactory)
+                    .addCallAdapterFactory(rxJavaCallAdapterFactory)
+                    .build();
+            sGitHubApi = retrofit.create(GitHubApi.class);
+        }
+        return sGitHubApi;
     }
 }

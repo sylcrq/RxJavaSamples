@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.rengwuxian.rxjavasamples.module.github_7.GitHubFragment;
 import com.rengwuxian.rxjavasamples.module.token_advanced_5.TokenAdvancedFragment;
 import com.rengwuxian.rxjavasamples.module.token_4.TokenFragment;
 import com.rengwuxian.rxjavasamples.module.cache_6.CacheFragment;
@@ -19,9 +20,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-    @Bind(android.R.id.tabs) TabLayout tabLayout;
-    @Bind(R.id.viewPager) ViewPager viewPager;
-    @Bind(R.id.toolBar) Toolbar toolBar;
+    @Bind(android.R.id.tabs)
+    TabLayout tabLayout;
+    @Bind(R.id.viewPager)
+    ViewPager viewPager;
+    @Bind(R.id.toolBar)
+    Toolbar toolBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
             @Override
             public int getCount() {
-                return 6;
+                return 7;
             }
 
             @Override
@@ -52,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
                         return new TokenAdvancedFragment();
                     case 5:
                         return new CacheFragment();
+                    case 6:
+                        return new GitHubFragment();
                     default:
                         return new ElementaryFragment();
                 }
@@ -72,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
                         return getString(R.string.title_token_advanced);
                     case 5:
                         return getString(R.string.title_cache);
+                    case 6:
+                        return getString(R.string.title_github);
                     default:
                         return getString(R.string.title_elementary);
                 }
